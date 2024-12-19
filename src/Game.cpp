@@ -16,14 +16,7 @@ Game::Game()
     // Initialize Box2D world_
     b2Vec2 gravity(0.0f, 9.81f);
     world_ = std::make_unique<b2World>(gravity);
-
     player_.init(*world_);
-
-    if (player_.getBody() == nullptr) {
-        std::cerr << "Failed to create body!" << std::endl;
-    } else {
-        std::cout << "Body created!" << std::endl;
-    }
 
     gameView_.reset(sf::FloatRect(0, 0, window_.getSize().x, window_.getSize().y));
 
@@ -132,11 +125,9 @@ void Game::startLevel() {
 }
 
 void Game::update(float deltaTime) {
-
     if (currentState_ == GameState::Playing) {
         world_->Step(timeStep_, velocityIterations_, positionIterations_);
         player_.update(deltaTime);
-        // Update game logic here
     }
 }
 

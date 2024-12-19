@@ -1,8 +1,13 @@
 #pragma once
+#include <list>
+#include <unordered_map>
+#include <vector>
+#include <memory>
+
 #include "Entity.h"
+#include "Bullet.h"
 
-#include<unordered_map>
-
+class Bullet;
 
 class Player : public Entity {
 public:
@@ -20,6 +25,9 @@ public:
     void moveLeft();
     void moveRight();
     shared_ptr<b2BodyDef> getBodyDef() const;
+    const std::vector<std::shared_ptr<Bullet>>& getBullets() const {
+        return bullets_;
+    }
 
 private:
     float m_moveSpeed{ 1.5f };
@@ -28,7 +36,7 @@ private:
     b2BodyDef bodyDef;
     EntityType m_entityType = EntityType::Player;
     std::shared_ptr<b2World> world_;
-
+    std::vector<std::shared_ptr<Bullet>> bullets_;
     static inline const std::unordered_map<std::string, path> texturePaths = {
         {"idle", path("Image/main-character/Idle.gif")},
     };

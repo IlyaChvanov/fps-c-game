@@ -2,6 +2,8 @@
 #include <SFML/Graphics.hpp>
 #include <box2d/box2d.h>
 #include <memory>
+
+#include "Bullet.h"
 #include "Level.h"
 #include "GameMenu.h"
 #include "Player.h"
@@ -10,9 +12,7 @@ class Game {
 public:
     Game();
     ~Game();
-
     void run();
-
 private:
     void processEvents();
     void update(float deltaTime);
@@ -26,7 +26,7 @@ private:
     std::unique_ptr<Level> level_;
     std::unique_ptr<game::GameMenu> menu_;
     Player player_;
-    
+
     // Game states
     enum class GameState {
         Menu,
